@@ -19,7 +19,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 CHROMA_PATH = SCRIPT_DIR.parent / "chroma"
 
 PROMPT_TEMPLATE = """
-Introduction: Answer the question at the end based only on the following context, and only output the answer as response, no need to output your thinking process. PS: think fater, shorter, and give the most accurate answer.
+Introduction: Answer the question at the end based only on the following context, and only output the answer as response, no need to output your thinking process. PS: Give the most detailed answer, use more than one phrase to answer if possible.
 
 Context:
 
@@ -64,7 +64,7 @@ def main():
 
     # Use Ollama as the local LLM
     # (Adjust base_url or model name depending on your Ollama config)
-    llm = OllamaLLM(model="deepseek-r1:1.5b")
+    llm = OllamaLLM(model="deepseek-r1:8b")
     response_text = llm.predict(prompt)
 
     # Show sources (file metadata)

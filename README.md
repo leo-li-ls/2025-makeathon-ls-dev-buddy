@@ -8,16 +8,24 @@ Frustrated by waiting for answers from unavailable colleagues?
 
 Try LS Dev Buddy!
 
+## tech stack
+
+- `Python 3.11`
+- `Pytorch`
+- `Ollama`
+- LLM: `Deepseek-r1:8b`
+- Text embedding model: `sentence-transformers/all-MiniLM-L6-v2`
+
 ## Install dependencies
 
 This introduction is for macOS, and only work with Python 3.11
 
 1. Download and install Ollama on your mac: https://ollama.com/download/mac
 
-2. Install `deepseek-r1:1.5b` model
+2. Install `deepseek-r1:8b` model
 
     ```bash
-    ollama run deepseek-r1:1.5b
+    ollama run deepseek-r1:8b
     ```
 
 3. Install python 3.11
@@ -53,5 +61,5 @@ python src/create_database.py
 Query the Chroma DB.
 
 ```python
-python src/query_data.py "How does Alice meet the Mad Hatter?"
+python src/query_data.py "Who asked Alice to wake up?"
 ```
