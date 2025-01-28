@@ -56,10 +56,32 @@ Create the Chroma DB.
 python src/create_database.py
 ```
 
-## Query the database
+## Query the database (CLI)
 
 Query the Chroma DB.
 
 ```python
 python src/query_data.py "Who asked Alice to wake up?"
+```
+
+## Run the server
+
+```python
+python src/server.py
+```
+
+## Rquest the server
+
+```bash
+$ curl -X POST http://localhost:3000/ask \
+  -H "Content-Type: application/json" \
+  -d '{"question": "Who has woke up Alice?"}'
+```
+
+The response should be:
+
+```json
+{
+  "answer": "her sister"
+}
 ```

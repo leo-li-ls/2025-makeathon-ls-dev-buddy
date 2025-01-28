@@ -8,5 +8,6 @@ libmagic
 onnxruntime
 chromadb
 tiktoken
+flask
 
 # install markdown depenendies with: `pip install "unstructured[md]"` after install the requirements file. Leave this line commented out. 
