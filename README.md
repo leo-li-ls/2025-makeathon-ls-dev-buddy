@@ -29,7 +29,7 @@ This introduction is for macOS, and only work with Python 3.11
 Create the Chroma DB.
 
 ```python
-python create_database.py
+python src/create_database.py
 ```
 
 ## Query the database
@@ -37,5 +37,5 @@ python create_database.py
 Query the Chroma DB.
 
 ```python
-python query_data.py "How does Alice meet the Mad Hatter?"
+python src/query_data.py "How does Alice meet the Mad Hatter?"
 ```
