@@ -70,7 +70,7 @@ python src/query_data.py "Who asked Alice to wake up?"
 python src/server.py
 ```
 
-## Rquest the server
+## Ask question by using API
 
 ```bash
 $ curl -X POST http://localhost:3000/ask \
