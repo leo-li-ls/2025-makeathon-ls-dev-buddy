@@ -60,7 +60,8 @@ def main():
     prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
     prompt = prompt_template.format(context=context_text, question=query_text)
 
-    print(prompt)
+    # debug usage
+    # print(prompt)
 
     # Use Ollama as the local LLM
     # (Adjust base_url or model name depending on your Ollama config)
