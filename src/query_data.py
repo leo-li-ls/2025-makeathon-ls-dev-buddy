@@ -1,35 +1,33 @@
 import argparse
 from pathlib import Path
 
+# Vector store and embeddings
 from langchain_community.vectorstores import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_openai import ChatOpenAI
+
+# Replace OpenAI with Ollama
+from langchain_ollama import OllamaLLM
+
+# Prompt template
 from langchain.prompts import ChatPromptTemplate
-from dotenv import load_dotenv
-import openai
-import os
 
 
 # ------------------------------------------------------------------------------
 # Build absolute paths relative to THIS script file
 # ------------------------------------------------------------------------------
 SCRIPT_DIR = Path(__file__).resolve().parent
-
-# If your top-level folder has "chroma/" at the same level as "src/", do:
 CHROMA_PATH = SCRIPT_DIR.parent / "chroma"
 
-# Load environment variables if still using OpenAI for chat
-load_dotenv()
-openai.api_key = os.environ.get("OPENAI_API_KEY")
-
 PROMPT_TEMPLATE = """
-Answer the question based only on the following context:
+Introduction: Answer the question at the end based only on the following context, and only output the answer as response, no need to output your thinking process. PS: think fater, shorter, and give the most accurate answer.
 
+Context:
+
+```text
 {context}
+```
 
----
-
-Answer the question based on the above context: {question}
+Question: "{question}"
 """
 
 def main():
@@ -38,7 +36,7 @@ def main():
     args = parser.parse_args()
     query_text = args.query_text
 
-    # If you want local embeddings for the DB search:
+    # Use local embeddings for the DB search
     embedding_function = HuggingFaceEmbeddings(
         model_name="sentence-transformers/all-MiniLM-L6-v2"
     )
@@ -55,7 +53,7 @@ def main():
         print("Unable to find matching results.")
         return
 
-    # Build the context text from the top matches
+    # Build context from matches
     context_text = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
 
     # Prepare the prompt
@@ -64,9 +62,10 @@ def main():
 
     print(prompt)
 
-    # Use OpenAI for chat (can be replaced with a local LLM if desired)
-    model = ChatOpenAI()
-    response_text = model.predict(prompt)
+    # Use Ollama as the local LLM
+    # (Adjust base_url or model name depending on your Ollama config)
+    llm = OllamaLLM(model="deepseek-r1:1.5b")
+    response_text = llm.predict(prompt)
 
     # Show sources (file metadata)
     sources = [doc.metadata.get("source", None) for doc, _score in results]
