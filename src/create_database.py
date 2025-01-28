@@ -1,18 +1,19 @@
-# from langchain.document_loaders import DirectoryLoader
+from pathlib import Path
 from langchain_community.document_loaders import DirectoryLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.schema import Document
-# from langchain.embeddings import OpenAIEmbeddings
-# from langchain_openai import OpenAIEmbeddings
-from langchain.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
-# import openai 
-from dotenv import load_dotenv
+from langchain_huggingface import HuggingFaceEmbeddings
 import os
 import shutil
 
-CHROMA_PATH = "chroma"
-DATA_PATH = "data/books"
+# ------------------------------------------------------------------------------
+# Build absolute paths relative to THIS script file
+# ------------------------------------------------------------------------------
+SCRIPT_DIR = Path(__file__).resolve().parent
+CHROMA_PATH = SCRIPT_DIR.parent / "chroma"
+DATA_PATH = SCRIPT_DIR.parent / "data"
+
 
 def main():
     generate_data_store()
@@ -23,7 +24,12 @@ def generate_data_store():
     save_to_chroma(chunks)
 
 def load_documents():
-    loader = DirectoryLoader(DATA_PATH, glob="*.md")
+    # Use '**/*.md' with recursive=True
+    loader = DirectoryLoader(
+        str(DATA_PATH),
+        glob="**/*.md",
+        recursive=True
+    )
     documents = loader.load()
     return documents
 
@@ -37,23 +43,28 @@ def split_text(documents: list[Document]):
     chunks = text_splitter.split_documents(documents)
     print(f"Split {len(documents)} documents into {len(chunks)} chunks.")
 
-    document = chunks[10]
-    print(document.page_content)
-    print(document.metadata)
+    # Only print chunk 10 if it exists
+    if len(chunks) > 10:
+        document = chunks[10]
+        print(document.page_content)
+        print(document.metadata)
 
     return chunks
-
-# Use local embeddings
-embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
 def save_to_chroma(chunks: list[Document]):
     # Clear out the database first.
     if os.path.exists(CHROMA_PATH):
         shutil.rmtree(CHROMA_PATH)
 
-    # Create a new DB from the documents.
+    # Use local embeddings
+    embedding_model = HuggingFaceEmbeddings(
+        model_name="sentence-transformers/all-MiniLM-L6-v2"
+    )
+
     db = Chroma.from_documents(
-        chunks, embedding_model, persist_directory=CHROMA_PATH
+        chunks,
+        embedding_model,
+        persist_directory=str(CHROMA_PATH)
     )
     db.persist()
     print(f"Saved {len(chunks)} chunks to {CHROMA_PATH}.")

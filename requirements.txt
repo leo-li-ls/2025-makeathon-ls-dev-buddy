@@ -2,8 +2,10 @@ sentence-transformers
 python-dotenv
 langchain
 langchain-community
+langchain-huggingface
 langchain-openai
 unstructured
+libmagic
 onnxruntime
 # For Windows users, install Microsoft Visual C++ Build Tools first
 # install onnxruntime before installing `chromadb`
