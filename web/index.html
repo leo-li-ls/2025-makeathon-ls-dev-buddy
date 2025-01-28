@@ -45,6 +45,8 @@
         .header {
             display: flex;
             align-items: center;
+            justify-content: center; /* Center the title horizontally */
+            position: relative; /* For absolute positioning of SVG */
             padding: 10px 20px;
             background-color: #f5f5f5; /* Light gray background for the header */
             border-bottom: 1px solid #ddd; /* Subtle border to separate header */
@@ -53,6 +55,15 @@
         .header svg {
             height: 30px; /* Adjust as needed */
             width: auto;
+            position: absolute; /* Remove from normal flow to position on the left */
+            left: 20px; /* Adjust spacing from the left edge */
+        }
+
+        /* Title Styling */
+        .header .title {
+            font-family: lsMedium, HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: black;
+            font-size: 1.5em; /* Adjust font size as needed */
         }
 
         /* Vue App Container */
@@ -211,6 +222,9 @@
                 <path d="M30.5999 7.09766H27.8999V22.7932H30.5999V7.09766Z"></path>
                 <path d="M35.3997 11.8965H32.6997V22.7934H35.3997V11.8965Z"></path>
             </svg>
+
+            <!-- Title -->
+            <span class="title">LS Dev Buddy</span>
         </header>
 
         <!-- Vue App -->
