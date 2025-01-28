@@ -85,3 +85,9 @@ The response should be:
   "answer": "her sister"
 }
 ```
+
+## View from UI
+
+Open the `web/index.html` file in your browser, or you can use IDE like VSCode and open it with Live Server.
+
+![image](./images/demo.png)
