@@ -16,9 +16,11 @@ Try LS Dev Buddy!
 - LLM: `Deepseek-r1:8b`
 - Text embedding model: `sentence-transformers/all-MiniLM-L6-v2`
 
-## Install dependencies
+## Prepare the environment
 
 This introduction is for macOS, and only work with Python 3.11
+
+### For the first time running
 
 1. Download and install Ollama on your mac: https://ollama.com/download/mac
 
@@ -37,7 +39,7 @@ This introduction is for macOS, and only work with Python 3.11
 4. Install the following dependencies:
 
     ```bash
-    rm -rf myenv
+    rm -rf myenv # Remove any previous virtual environment
     python3.11 -m venv myenv
     source myenv/bin/activate
     python --version  # Should say 3.11.x
@@ -47,6 +49,15 @@ This introduction is for macOS, and only work with Python 3.11
     pip install -r requirements.txt
     pip install "unstructured[md]"
     ```
+
+### For every time running
+
+Prepare the python environment
+
+```bash
+python3.11 -m venv myenv
+source myenv/bin/activate
+```
 
 ## Create database
 
