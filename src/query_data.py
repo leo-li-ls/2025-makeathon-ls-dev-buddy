@@ -46,10 +46,10 @@ def main():
     )
 
     # Search the DB
-    results = db.similarity_search_with_relevance_scores(query_text, k=5)
+    results = db.similarity_search_with_relevance_scores(query_text, k=10)
 
     # Threshold check
-    if len(results) == 0 or results[0][1] < 0.5:
+    if len(results) == 0 or results[0][1] < 0.2:
         print("Unable to find matching results.")
         return
 

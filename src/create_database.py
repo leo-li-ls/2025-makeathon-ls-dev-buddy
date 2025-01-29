@@ -41,8 +41,8 @@ def split_text(documents: list[Document]):
         print(document.metadata)
 
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=150,
-        chunk_overlap=120,
+        chunk_size=400,
+        chunk_overlap=300,
         length_function=len,
         is_separator_regex=False,
         add_start_index=True,
