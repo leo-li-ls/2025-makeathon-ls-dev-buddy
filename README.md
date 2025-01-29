@@ -30,10 +30,11 @@ This introduction is for macOS, and only work with Python 3.11
     ollama run deepseek-r1:8b
     ```
 
-3. Install python 3.11
+3. Install python 3.11 and libmagic
 
     ```bash
     brew install python@3.11
+    brew install libmagic
     ```
 
 4. Install the following dependencies:
@@ -61,11 +62,13 @@ source myenv/bin/activate
 
 ## Create database
 
-Create the Chroma DB.
+1. Before creating the Chrome DB, please add your own markdown files to the `data/` folder, you can use usbfolder to organize them.
 
-```python
-python src/create_database.py
-```
+2. Create the Chroma DB.
+
+    ```python
+    python src/create_database.py
+    ```
 
 ## Query the database (CLI)
 

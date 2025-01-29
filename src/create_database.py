@@ -42,14 +42,14 @@ def split_text(documents: list[Document]):
     )
     chunks = text_splitter.split_documents(documents)
     # debug usage
-    #print(f"Split {len(documents)} documents into {len(chunks)} chunks.")
+    print(f"Split {len(documents)} documents into {len(chunks)} chunks.")
 
     # debug usage
     # Only print chunk 10 if it exists
-    # if len(chunks) > 10:
-    #     document = chunks[10]
-    #     print(document.page_content)
-    #     print(document.metadata)
+    if len(chunks) > 10:
+        document = chunks[10]
+        print(document.page_content)
+        print(document.metadata)
 
     return chunks
 
