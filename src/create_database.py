@@ -41,10 +41,24 @@ def split_text(documents: list[Document]):
         print(document.metadata)
 
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=500,
-        chunk_overlap=400,
+        chunk_size=150,
+        chunk_overlap=120,
         length_function=len,
+        is_separator_regex=False,
         add_start_index=True,
+        separators=[
+            "\n\n",
+            "\n",
+            " ",
+            ".",
+            ",",
+            "\u200b",  # Zero-width space
+            "\uff0c",  # Fullwidth comma
+            "\u3001",  # Ideographic comma
+            "\uff0e",  # Fullwidth full stop
+            "\u3002",  # Ideographic full stop
+            "",
+        ],
     )
     chunks = text_splitter.split_documents(documents)
     # debug usage
