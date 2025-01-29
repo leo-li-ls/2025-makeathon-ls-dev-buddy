@@ -24,19 +24,25 @@ def generate_data_store():
     save_to_chroma(chunks)
 
 def load_documents():
-    # Use '**/*.md' with recursive=True
+    # Updated glob pattern to match both .md and .MD
     loader = DirectoryLoader(
         str(DATA_PATH),
-        glob="**/*.md",
+        glob="**/*.[mM][dD]",
         recursive=True
     )
     documents = loader.load()
     return documents
 
 def split_text(documents: list[Document]):
+    for document in documents:
+        # debug usage
+        # Only print the first document if it exists
+        print(document.page_content)
+        print(document.metadata)
+
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=300,
-        chunk_overlap=100,
+        chunk_size=500,
+        chunk_overlap=400,
         length_function=len,
         add_start_index=True,
     )
